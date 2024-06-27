@@ -1,0 +1,23 @@
+package com.digiTech.app.repository;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import com.digiTech.app.models.Holiday;
+
+@Repository
+public class CalendarRepository {
+    
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    private static final String GET_ALL_HOLIDAYS_SQL = "SELECT * from holidays";
+
+    public List<Holiday> getAllHolidays() {
+        return jdbcTemplate.query(GET_ALL_HOLIDAYS_SQL, BeanPropertyRowMapper.newInstance(Holiday.class));
+    }
+    
+}
